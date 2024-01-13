@@ -1,0 +1,38 @@
+body {
+    display: flex;
+}
+label {
+    display: inline-block;
+    font-size: 13px;
+    margin: 0;
+}
+form > p{
+    width: 33.33%;
+}
+.main {
+    width: 80%;
+    position: relative;
+    left: 20%;
+}
+
+.main input,
+.main select {
+    width: 100%;
+    height: 30px;
+    font-size: 11px;
+    border-radius: 5px;
+    border: 1px solid rgb(118, 118, 118);
+}
+
+input[type=radio] {
+    width: 18px;
+}
+button{
+    border-radius: 10px;
+    font-size: 9px;
+    border-width: 1px;
+}
+.guest input,.guest select,.guest button{
+    width: 23%;
+
+}

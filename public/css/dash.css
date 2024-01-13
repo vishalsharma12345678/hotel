@@ -1,0 +1,23 @@
+.item{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.item div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 250px;
+    height: 150px;
+    border-radius: 15px;
+    background-color: blue;
+    color: white;
+}
+.item div p{
+    color: white;
+}
+.main{
+}

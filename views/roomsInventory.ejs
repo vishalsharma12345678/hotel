@@ -1,0 +1,66 @@
+<%- include('./include/head') %>
+    <link rel="stylesheet" href="./css/roomsInventroy.css">
+    </head>
+
+    <body>
+        <%- include('./include/header') %>
+            <div class="main">
+                <h1>Rooms Inventory</h1>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Rooms</th>
+                        <th>Rooms_type</th>
+                        <th>Rooms_Ameneties</th>
+                        <th>Action</th>
+                    </tr>
+                    <% if (!rooms.length > 0) { %>
+                        <tr>
+                            <td colspan="5" style="text-align: center;">No Rooms are Found. Add new Room <button><a href="/addroom">AddRoom</a></button></td>
+                        </tr>
+                    <% } %>
+                    <% rooms.forEach((room,index) => { %>
+                        <tr>
+                            <td><%= index+1 %></td>
+                            <td><%= room.roomNo %></td>
+                            <td><%= room.roomType %></td>
+                            <td><%= room.Room_amneities %></td>
+                            <td>
+                                <button><a href="/room/deleteRoom/<%= room._id %>">Delete</a></button>
+                                <% if (room.Room_Status !== "Locked") { %>
+                                    <button><a href="room/lockRoom/<%= room._id %>">Lock</a></button>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                    
+                </table>
+            </div>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <!-- Popper.JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+                integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+                crossorigin="anonymous"></script>
+            <!-- Bootstrap JS -->
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+                integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+                crossorigin="anonymous"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#sidebar").mCustomScrollbar({
+                        theme: "minimal",
+                    });
+
+                    $("#sidebarCollapse").on("click", function () {
+                        $("#sidebar, #content").toggleClass("active");
+                        $(".collapse.in").toggleClass("in");
+                        $("a[aria-expanded=true]").attr("aria-expanded", "false");
+                    });
+                });
+            </script>
+
+    </body>
+
+    </html>

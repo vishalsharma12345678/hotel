@@ -1,0 +1,188 @@
+<%- include('./include/head') %>
+  <link rel="stylesheet" href="./css/registertion.css" />
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <script src="/script/change.js" defer></script>
+  <script src="./script/date.js" defer></script>
+  <script src="./script/new.js" defer></script>
+  </head>
+
+  <body>
+    <%- include('./include/header.ejs') %>
+      <div class="main">
+        <form action="/book/addbooking" method="post" style="display: flex; flex-wrap: wrap; padding: 2rem 5rem;">
+          <p>
+            <label for="">Reg No</label><br />
+            <input type="text" name="registrationNo" required id="" />
+          </p>
+          <p>
+            <label for="">Invoice No.</label><br />
+            <input type="number" name="invoice_No" required id="" />
+          </p>
+          <p>
+            <label for="">Log No.</label><br />
+            <input type="number" name="log_No" required id="" />
+          </p>
+          <p>
+            <label for="">check in</label><br />
+            <input type="date" id="check_in" required name="check_in" />
+          </p>
+          <p>
+            <label for="">Expected Check out</label><br />
+            <input type="date" name="check_out" id="check_out" required value="01/01/2018 - 01/15/2018" />
+          </p>
+          <p>
+            <label for="">Room Type</label><br />
+            <select name="room_type" required id="">
+              <option value="" selected disabled>choose...</option>
+              <option value="Standard">Standard Room</option>
+            </select>
+          </p>
+          <p>
+            <label for="">Meal Plan</label><br />
+            <select name="meal_plan" id="" required>
+              <option value="" disabled selected>choose...</option>
+              <option value="room_only">Room Only</option>
+              <option value="bed&breakfast">Bed & BreakFast</option>
+              <option value="halfboard">Half Board</option>
+              <option value="fullboard">Full Board</option>
+            </select>
+          </p>
+          <p>
+            <label for="">Room Number</label><br />
+            <span id="roomdata" hidden>
+              <%= rooms %>
+            </span>
+            <select name="room_number" id="rooms" required>
+              <option value="">choose...</option>
+            </select>
+          </p>
+          <p>
+            <label for="">Guest Basis</label><br />
+            <select name="guest_basis" id="">
+              <option value="direct booking" selected>Direct booking</option>
+              <option value="fit">FIT</option>
+              <option value="OTA">OTA</option>
+            </select>
+          </p>
+          <p>
+            <label for="">Guest Type</label><br />
+            <select name="guest_type" id="tourist_type">
+              <option value="" disabled selected>choose...</option>
+              <option value="local">Local</option>
+              <option value="work_permit">Work Permit</option>
+              <option value="tourist">Tourist</option>
+            </select>
+          </p>
+          <div style="width: 33.33%">
+            <p style="margin: 0;">
+              <label for="">bill to</label>
+            </p>
+            <div style="display: flex;gap: 5px; align-items: center;justify-content: space-around;;">
+              <input type="radio" name="bill_to" id="choose" value="customer" />
+              <label for="customer">Customer</label>
+              <input type="radio" name="bill_to" id="choose" value="company" />
+              <label for="company">Company</label>
+            </div>
+          </div>
+          <p>
+            <label for="">Company Name</label>
+            <input type="text" name="company_name" disabled id="company_name" />
+          </p>
+          <p>
+            <label for="">Full Name</label>
+            <input type="text" name="full_name" id="" />
+          </p>
+          <p>
+            <label for="">Email</label>
+            <input type="text" name="email" id="" />
+          </p>
+          <p>
+            <label for="">Mobile number</label>
+            <input id="phone" type="tel" name="phone" />
+          </p>
+          <p>
+            <label for="">WP/ND</label>
+            <input type="text" id="wp_nd" disabled name="wp_nd" />
+          </p>
+          <p>
+            <label for="">Passport</label>
+            <input type="text" disabled name="passport_number" id="passport_number" />
+          </p>
+
+          <p>
+            <label for="">Natinality</label>
+            <select name="nationality">
+              <%- include('./include/options') %>
+            </select>
+          </p>
+          <p>
+            <label for="">Country of Residence</label>
+            <select name="country_residence">
+              <%- include('./include/options') %>
+            </select>
+          </p>
+          <p>
+            <label for="">D.O.B</label>
+            <input type="date" name="dob" />
+          </p>
+          <p>
+            <label for="">Profession</label>
+            <input type="text" name="proffesion" id="" />
+          </p>
+          <p>
+            <label for="">No of Pax</label>
+            <input type="text" name="noofpax" id="" />
+          </p>
+          <p>
+            <label for="">Group</label>
+            <select name="group" id="">
+              <option value="no">no</option>
+              <option value="yes">yes</option>
+            </select>
+          </p>
+          <p>
+            <!-- <label for="">Upload Id</label>
+        <input type="file" name="" id="" style="border: 1px solid black" /> -->
+          </p>
+          <p>
+            <button>Add More Guest</button>
+          </p>
+          <p>
+            <input type="text" name="userid" hidden value="<%= locals.user._id %>" />
+          </p>
+          <div style="width: 100%;display: flex; align-items: center;justify-content: space-between;" class="guest">
+            <input type="text" name="" id="">
+            <input type="number" name="" id="">
+            <select name="" id="">
+              <%- include('./include/options') %>
+            </select>
+            <input type="file">
+            <a href="">Remove</a>
+          </div>
+
+
+          <p>
+            <label for="">Payment Type</label>
+            <select name="payment_type" id="">
+              <option value="" selected disabled>Payment Type</option>
+              <option value="cash">Cash</option>
+              <option value="credit">Credit</option>
+            </select>
+          </p>
+          <p>
+            <label for="">Remark</label>
+            <input type="text" name="remark" />
+          </p>
+          <p>
+            <label for="">Verified By</label>
+            <input type="hidden" name="verifiedby" value="<%= locals.user.username %>" />
+
+            <input type="text" name="verifiedby" disabled value="<%= locals.user.username %>" />
+          </p>
+
+          <button>Save Data</button>
+        </form>
+      </div>
+
+      <%- include("./include/footer") %>

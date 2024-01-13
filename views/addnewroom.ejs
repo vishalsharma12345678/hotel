@@ -1,0 +1,51 @@
+<%- include('./include/head') %>
+<link rel="stylesheet" href="./css/addroom.css">
+</head>
+<body>
+    <%- include('./include/header') %>
+    <div class="main">
+        <h1>Add New Room</h1>
+        <form action="/room/addroom" method="post">
+            <p >
+                <label for="">Rooms No</label><br>
+                <input type="text" name="roomNo">
+            </p>
+            <p>
+                <label>Room Type</label><br>
+                <select name="roomType">
+                    <option value="" selected disabled>choose....</option>
+                    <option value="Standard">Standard</option>
+                </select>
+            </p>
+            <p>
+                <label>Room Amneities</label>
+                <input type="text" name="Room_amneities">
+            </p>
+            <p>
+                <label >Room Status</label>
+                <select name="Room_Status" id="">
+                    <option value="" disabled selected >choose...</option>
+                    <option value="Available">Available</option>
+                    <option value="Locked">Locked</option>
+                </select>
+            </p>
+            <p>
+                <label>Rooms Type Name</label>
+                <input type="text" name="room_type_name" placeholder="standard,city view, view room etc">
+            </p>
+            <p>
+                <label>Rate Type Name</label>
+                <input type="text" name="rate_type_name" placeholder="rooms only,single,double bad etc">
+            </p>
+            <p>
+                <label>Currency</label>
+                <select name="currency" >
+                    <option value="USD">USD</option>
+                </select>
+            </p>
+            <div >
+                <button>Submit</button>
+            </div>
+        </form>
+    </div>
+<!-- <%- include('./include/footer') %> -->
