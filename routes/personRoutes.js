@@ -8,15 +8,9 @@ router.get('/',async (req, res)=>{
         res.send(result);
     })
 })  
-router.get('/createUser',async (req, res)=>{
-    await User.create({
-        name:'shashank',
-        username:'shashank123',
-        password:'123',
-        isAdmin: false,
-        address:'no',
-        mobileNumber:'9368660084'
-    }).then(async (result)=>{
+router.post('/createUser',async (req, res)=>{
+    console.log(req.body)
+    await User.create(req.body).then(async (result)=>{
         res.send(result);
     })
 }) 
