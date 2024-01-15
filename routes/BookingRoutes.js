@@ -96,12 +96,13 @@ router.post('/updateBookingEntry',async (req, res) => {
     room.currentbookings=temp;
     await room.save()
     }
+    console.log((bookingitem.price*days(new Date(bookingitem.check_in),new Date(bookingitem.check_out))*bookingitem.adultNo))
     let oe = await Invoices.create({
       invoiceNumber:bookingitem.invoice_No,
       invoicePlayer:bookingitem.userid.name,
       Tax:12,
       TGST: 10,
-      totalAmount: bookingitem.totalAmount,
+      totalAmount:(bookingitem.price*days(new Date(bookingitem.check_in),new Date(bookingitem.check_out))*bookingitem.adultNo),
       paymentType: bookingitem.payment_type,
       status: bookingitem.status,
       bookingid:bookingitem._id,
@@ -133,5 +134,9 @@ router.get('/invoices',async (req, res) => {
    res.send({result:result});
   })
 });
-
+function days(i , j){
+  let  Difference_In_Time = i.getTime() - j.getTime()
+  let Difference_In_Days = Math.round(Difference_In_Time / (1000 * 3600 * 24));
+  return Math.abs(Difference_In_Days) + 1;
+}
 module.exports = router;
