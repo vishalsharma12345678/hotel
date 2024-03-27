@@ -1,39 +1,42 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const InvoiceSchema = new Schema({
-    invoiceNumber:{
-        type:Number
+const InvoiceSchema = new Schema(
+  {
+    invoiceNumber: {
+      type: String,
     },
-    invoiceOpretor:{
-        type:String
+    invoiceOpretor: {
+      type: String,
     },
-    invoicePlayer:{
-        type:String
+    invoicePlayer: {
+      type: String,
     },
-    TGST:{
-        type:Number
+    TGST: {
+      type: Number,
     },
-    Tax:{
-        type:Number
+    Tax: {
+      type: Number,
     },
-    totalAmount:{
-        type:Number
+    totalAmount: {
+      type: Number,
     },
-    currency:{
-        type:String,
-        default:'USD'
+    currency: {
+      type: String,
+      default: "USD",
     },
-    paymentType:{
-        type:String
+    paymentType: {
+      type: String,
     },
-    status:{
-        type:String
+    status: {
+      type: String,
     },
-    bookingid:{
-        type:mongoose.Types.ObjectId,
-        ref: 'booking'
-    }
-},{timestamps:true});
+    bookingid: {
+      type: mongoose.Types.ObjectId,
+      ref: "booking",
+    },
+  },
+  { timestamps: true }
+);
 
 const Invoices = mongoose.model("Invoices", InvoiceSchema);
 

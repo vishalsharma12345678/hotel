@@ -68,7 +68,7 @@ router.get("/getallroomstype", async(req, res) => {
 });
 router.get("/roomsDetails", async(req, res) => {
   try {
-       let EmptyRooms = await Room.find({status:{$ne:"booked"}})
+       let EmptyRooms = await Room.find({status:{$ne:"booked"},Room_Status:"Available"})
        const OccupiedRoom = await Room.find({status:{$eq:"booked"}})
        const Upcomingbooking = await f.find({$and:[{check_in:{$gt:new Date().toISOString().split('T')[0]}},{status:{$eq:"booked"}}]})
        const Lastbooking = await f.find({$and:[{check_out:{$lt:new Date().toISOString().split('T')[0]}},{check_in_check_out:"Checkedout"}]})
