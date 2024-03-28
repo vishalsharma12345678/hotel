@@ -14,6 +14,7 @@ router.post("/gues", async (req, res) => {
   });
 });
 router.post("/addbooking", async function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
   let room_ids = [];
   let { room_number, ...rest } = req.body;
   room_number.forEach(async (room) => {
