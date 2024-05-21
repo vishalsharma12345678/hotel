@@ -5,11 +5,14 @@ const session = require("express-session");
 const path = require("path");
 const routes = require("./routes");
 const db = require("./db");
+const schedule = require("node-schedule");
+
 require("dotenv").config();
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 var cors = require("cors");
+const Booking = require("./Model/Booking");
 app.use(cors());
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(
@@ -31,6 +34,13 @@ app.use(async (req, res, next) => {
   if (!user) return next();
   res.locals.user = user;
   next();
+});
+
+schedule.scheduleJob("* * */1 * *", async function () {
+  let fine = await Booking.find({ payment_type: "onhold" });
+  fine.forEach((item) => {});
+  console.log(fine);
+  console.log(new Date());
 });
 app.use(routes);
 app.listen(process.env.PORT, () => {

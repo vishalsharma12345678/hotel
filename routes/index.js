@@ -3,18 +3,52 @@ const Rooms = require("../Model/Room");
 const Bookings = require("../Model/Booking");
 const RoomType = require("../Model/Roomtype");
 const Guests = require("../Model/Guests");
+const Company = require("../Model/Company");
 const router = express.Router();
 router.use("/room", require("./roomRoutes"));
 router.use("/book", require("./BookingRoutes"));
 router.use("/login", require("./userRoutes"));
 router.use("/user", require("./personRoutes"));
+router.use("/holdbills", require("./onHoldRoute"));
+const mongoose = require("mongoose");
 router.get("/", function (req, res) {
   console.log(res.locals.user);
   res.render("login");
 });
+// router.get("/Company/details", async function (req, res) {
+//   let data = await Company.create({
+//     name: "Off days inn",
+//     Tgst_Tax: 12,
+//     Tax: 8,
+//     owner: "XYZ",
+//   });
+//   res.send(data);
+// });
+
+router.get("/Company/details/find", async function (req, res) {
+  console.log("first");
+  let data = await Company.find({});
+  console.log(data);
+  res.send(data);
+});
+router.post("/Company/details/find", async function (req, res) {
+  console.log(req.body);
+  let data = await Company.updateOne(
+    {
+      _id: new mongoose.Types.ObjectId("662f6bd10925d70859184bce"),
+    },
+    {
+      $set: {
+        Tgst_Tax: req.body.Tgst_Tax,
+        Tax: req.body.Tax,
+      },
+    }
+  );
+  res.send(data);
+});
+
 router.get("/guests", async function (req, res) {
   let guest = await Guests.find({});
-  console.log(guest);
   res.send(guest);
 });
 router.get("/d", function (req, res) {
@@ -66,6 +100,12 @@ router.get("/addroom", function (req, res) {
 router.post("/addRoomtype", async (req, res) => {
   console.log(req.body);
   await RoomType.create({ name: req.body.data });
+  res.send("ok");
+});
+router.get("/deleteRoomtype/:id", async (req, res) => {
+  console.log(req.params.id);
+  let data = await RoomType.findByIdAndDelete(req.params.id);
+  console.log(data);
   res.send("ok");
 });
 router.get("/Roomtype", async (req, res) => {

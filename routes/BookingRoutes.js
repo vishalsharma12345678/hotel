@@ -14,6 +14,7 @@ router.post("/gues", async (req, res) => {
   });
 });
 router.post("/addbooking", async function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
   let room_ids = [];
   let { room_number, ...rest } = req.body;
   room_number.forEach(async (room) => {
@@ -67,7 +68,6 @@ router.get("/allBookings", async (req, res) => {
       const Lastbooking = await Booking.find({
         $or: [
           { check_out: { $lt: new Date().toISOString().split("T")[0] } },
-          { check_in_check_out: "Checkedout" },
           { status: { $ne: "booked" } },
         ],
       })
@@ -140,7 +140,6 @@ router.post("/updateBookingEntry", async (req, res) => {
       const room = await Rooms.findOne({ _id: room1 })
         .populate("currentbookings")
         .exec();
-      console.log(room);
       const temp = Array.from(room.currentbookings).filter((booking) => {
         booking.booked_id !== new mongoose.Types.ObjectId(bookingitem._id);
       });
@@ -163,6 +162,58 @@ router.post("/updateBookingEntry", async (req, res) => {
   });
   bookingitem.Invoice = oe._id;
   await bookingitem.save();
+
+  res.send("ok");
+});
+router.post("/updateBookingEntryhold", async (req, res) => {
+  const { bookingid, value } = req.body;
+  const bookingitem = await Booking.findOne({ _id: bookingid }).populate(
+    "userid"
+  );
+  bookingitem.check_in_check_out = value;
+  bookingitem.status = "cancelled";
+
+  if (value === "Checkedout") {
+    bookingitem.room_number.forEach(async (room1) => {
+      const room = await Rooms.findOne({ _id: room1 })
+        .populate("currentbookings")
+        .exec();
+      const temp = Array.from(room.currentbookings).filter((booking) => {
+        booking.booked_id !== new mongoose.Types.ObjectId(bookingitem._id);
+      });
+      room.currentbookings = temp;
+      await room.save();
+    });
+  }
+
+  bookingitem.Invoice = null;
+  await bookingitem.save();
+
+  res.send("ok");
+});
+router.post("/updateBookingEntryCredit", async (req, res) => {
+  const { id } = req.body;
+  console.log(req.body);
+  const bookingitem = await Booking.findOne({ _id: id }).populate("userid");
+  console.log(bookingitem);
+  bookingitem.payment_type = "credit";
+
+  let oe = await Invoices.create({
+    invoiceNumber: bookingitem.invoice_No,
+    invoicePlayer: bookingitem.full_name,
+    Tax: 12,
+    TGST: 10,
+    totalAmount:
+      bookingitem.price *
+      days(new Date(bookingitem.check_in), new Date(bookingitem.check_out)) *
+      (bookingitem.adultNo / 4),
+    paymentType: bookingitem.payment_type,
+    status: bookingitem.status,
+    bookingid: bookingitem._id,
+  });
+  bookingitem.Invoice = oe._id;
+  await bookingitem.save();
+
   res.send("ok");
 });
 router.post("/updatebookingdetails", async (req, res) => {
@@ -231,4 +282,5 @@ router.post("/allBookingswithdate", async (req, res) => {
     Upcomingbooking: Upcomingbooking,
   });
 });
+
 module.exports = router;

@@ -16,7 +16,6 @@ router.post("/createUser", async (req, res) => {
 });
 router.post("/update", async (req, res) => {
   let { id, value } = req.body;
-  value = value === "true" ? true : false;
   id = new mongoose.Types.ObjectId(id);
   console.log(req.body);
   console.log(id);

@@ -25,8 +25,7 @@ const UserSchema = new Schema({
     required: true,
   },
   isAdmin: {
-    type: Boolean,
-    default: false,
+    type: String,
   },
   booking: {
     type: Boolean,
@@ -45,6 +44,10 @@ const UserSchema = new Schema({
     default: false,
   },
   Users: {
+    type: Boolean,
+    default: false,
+  },
+  recption: {
     type: Boolean,
     default: false,
   },
