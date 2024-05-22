@@ -14,7 +14,15 @@ app.use(express.json());
 var cors = require("cors");
 const Booking = require("./Model/Booking");
 app.use(cors());
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://octopus-app-nvngz.ondigitalocean.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(
   session({
     //name to be put in "key" field in postman etc

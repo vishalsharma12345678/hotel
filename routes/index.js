@@ -15,15 +15,15 @@ router.get("/", function (req, res) {
   console.log(res.locals.user);
   res.render("login");
 });
-// router.get("/Company/details", async function (req, res) {
-//   let data = await Company.create({
-//     name: "Off days inn",
-//     Tgst_Tax: 12,
-//     Tax: 8,
-//     owner: "XYZ",
-//   });
-//   res.send(data);
-// });
+router.get("/Company/details", async function (req, res) {
+  let data = await Company.create({
+    name: "Off days inn",
+    Tgst_Tax: 12,
+    Tax: 8,
+    owner: "XYZ",
+  });
+  res.send(data);
+});
 
 router.get("/Company/details/find", async function (req, res) {
   console.log("first");
