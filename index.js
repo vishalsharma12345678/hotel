@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://octopus-app-nvngz.ondigitalocean.app",
+      "https://starfish-app-9da43.ondigitalocean.app/",
     ],
     credentials: true,
   })
