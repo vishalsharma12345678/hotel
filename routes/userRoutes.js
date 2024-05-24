@@ -8,9 +8,14 @@ router.post("/getlogin", function (req, res) {
   console.log(req.body);
   User.findOne({ username: req.body.username }).then(function (user) {
     console.log(user);
-    if (req.body.password === user.password) {
-      req.session.user = user;
-      return res.send(user);
+    if (user) {
+      if (req.body.password === user.password) {
+        req.session.user = user;
+        return res.send(user);
+      }
+      return res.status(404).send("Invalid username or Password");
+    } else {
+      return res.status(404).send("Invalid username or Password");
     }
   });
 });
