@@ -30,27 +30,11 @@ const RoomsSchema = new Schema(
       type: String,
       default: "USD",
     },
-    breakfast_price: {
+    Bedbreakfast: {
       type: Number,
       required: true,
     },
-    lunch_price: {
-      type: Number,
-      required: true,
-    },
-    dinner_price: {
-      type: Number,
-      required: true,
-    },
-    breakfast_lunch: {
-      type: Number,
-      required: true,
-    },
-    lunch_dinner: {
-      type: Number,
-      required: true,
-    },
-    dinner_breakfast: {
+    halfboard: {
       type: Number,
       required: true,
     },
