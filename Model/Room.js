@@ -32,19 +32,15 @@ const RoomsSchema = new Schema(
     },
     Bedbreakfast: {
       type: Number,
-      required: true,
     },
     halfboard: {
       type: Number,
-      required: true,
     },
     full_board: {
       type: Number,
-      required: true,
     },
     adult_charge: {
       type: Number,
-      required: true,
     },
     status: {
       type: String,
