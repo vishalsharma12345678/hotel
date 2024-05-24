@@ -35,7 +35,7 @@ router.post("/Company/details/find", async function (req, res) {
   console.log(req.body);
   let data = await Company.updateOne(
     {
-      _id: new mongoose.Types.ObjectId("662f6bd10925d70859184bce"),
+      _id: new mongoose.Types.ObjectId("664d95310e1d38687bc012e8"),
     },
     {
       $set: {
