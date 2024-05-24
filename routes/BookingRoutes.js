@@ -55,7 +55,12 @@ router.post("/addbooking", async function (req, res) {
   });
 });
 router.get("/allBookings", async (req, res) => {
-  await Booking.find({ check_in_check_out: "Checkedin" })
+  await Booking.find({
+    $or: [
+      { check_in_check_out: "Checkedin" },
+      { check_in: { $lt: new Date().toISOString().split("T")[0] } },
+    ],
+  })
     .populate("room_number")
     .then(async (bookings) => {
       if (!bookings) return res.status(404).send("Error in Finding");
