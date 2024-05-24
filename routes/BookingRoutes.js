@@ -130,6 +130,19 @@ router.post("/updateBooking", async (req, res) => {
   await room.save();
   res.send("ok");
 });
+router.post("/updateBookingcheckin", async (req, res) => {
+  const { bookingid, value } = req.body;
+  console.log(req.body);
+  const bookingitem = await Booking.findOne({ _id: bookingid }).populate(
+    "userid"
+  );
+  console.log(bookingitem);
+  bookingitem.check_in_check_out = value;
+
+  await bookingitem.save();
+
+  res.send("ok");
+});
 router.post("/updateBookingEntry", async (req, res) => {
   const { bookingid, value } = req.body;
   console.log(req.body);
