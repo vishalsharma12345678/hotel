@@ -58,7 +58,7 @@ router.get("/allBookings", async (req, res) => {
   await Booking.find({
     $and: [
       { check_in_check_out: { $ne: "Checkedout" } },
-      { check_in: { $lt: new Date().toISOString().split("T")[0] } },
+      { check_in: { $lte: new Date().toISOString().split("T")[0] } },
     ],
   })
     .populate("room_number")
