@@ -57,8 +57,9 @@ router.post("/addbooking", async function (req, res) {
 router.get("/allBookings", async (req, res) => {
   await Booking.find({
     $and: [
-      { check_in_check_out: { $ne: "Checkedout" } },
       { check_in: { $lte: new Date().toISOString().split("T")[0] } },
+      { check_out: { $gte: new Date().toISOString().split("T")[0] } },
+      { check_in_check_out: { $ne: "Checkedout" } },
     ],
   })
     .populate("room_number")
