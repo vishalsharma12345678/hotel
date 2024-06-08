@@ -224,8 +224,11 @@ router.post("/updateBookingEntryCredit", async (req, res) => {
     TGST: 10,
     totalAmount:
       bookingitem.price *
-      days(new Date(bookingitem.check_in), new Date(bookingitem.check_out)) *
-      (bookingitem.adultNo / 4),
+        days(new Date(bookingitem.check_in), new Date(bookingitem.check_out)) *
+        (bookingitem.adultNo / 4) ===
+      0
+        ? 1
+        : bookingitem.adultNo / 4,
     paymentType: bookingitem.payment_type,
     status: bookingitem.status,
     bookingid: bookingitem._id,
