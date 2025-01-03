@@ -18,6 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "http://localhost:9000",
       "https://starfish-app-9da43.ondigitalocean.app/",
     ],
     credentials: true,
